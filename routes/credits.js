@@ -13,10 +13,9 @@ router.get('/', permission('admin', 'client'), async (req, res) => {
 router.post('/', permission('admin', 'client'), async (req, res) => {
   const { body } = req;
   const credit = await sequelize.models.credits.create({
-    name: body.name,
     description: body.description,
-    price: body.price,
-    image: body.image,
+    periodicidad: body.periodicidad,
+    cifra: body.cifra,
   });
   await credit.save();
   return res.status(201).json({ data: credit })
@@ -30,10 +29,9 @@ router.put('/:id', permission('admin'), async (req, res) => {
     return res.status(404).json({ code: 404, message: 'Credit not found' });
   }
   const updatedCredit = await credit.update({
-    name: body.name,
     description: body.description,
-    price: body.price,
-    image: body.image,
+    periodicidad: body.periodicidad,
+    cifra: body.cifra,
   });
   return res.json({ data: updatedCredit });
 });
