@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 
 // Importing models
 const Product = require('./models/product');
+const Credit = require('./models/credit');
 const Review = require('./models/review');
 const User = require('./models/user');
 
@@ -16,6 +17,7 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
 // Getting models
 const models = [
   Product,
+  Credit,
   Review,
   User,
 ];
@@ -25,8 +27,8 @@ for (let model of models) {
   model(sequelize);
 }
 
-// sequelize.sync({ force: false })
-//     .then(() => console.log("Tableas creadas"));
+sequelize.sync({ force: false })
+     .then(() => console.log("Tableas creadas"));
 
 // Configuring relations
 const { products, reviews } = sequelize.models;
